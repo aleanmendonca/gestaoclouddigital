@@ -54,7 +54,7 @@ export function Login() {
   };
 
   return (
-    <AuthLayout title="Login">
+    <AuthLayout>
         <SignIn />
     </AuthLayout>
   );
