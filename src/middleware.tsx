@@ -10,7 +10,6 @@ import React from 'react';
     export function Middleware({ children }: MiddlewareProps) {
       const { isSignedIn, isLoaded, user } = useAuth();
       const location = useLocation();
-      const planId = useUserStore((state) => state.planId);
       const setCurrentUser = useUserStore((state) => state.setCurrentUser);
 
       React.useEffect(() => {
@@ -20,7 +19,7 @@ import React from 'react';
             name: user.firstName || '',
             email: user.emailAddresses[0]?.emailAddress || '',
             photo: user.imageUrl,
-            planId: user.publicMetadata.planId as string | null || null,
+            planId: null,
             role: user.publicMetadata.role as 'admin' | 'employee' || 'employee'
           });
         }
@@ -31,18 +30,13 @@ import React from 'react';
       }
 
       const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
-      const isSelectPlanPage = location.pathname === '/select-plan';
 
       if (isSignedIn && isAuthPage) {
         return <Navigate to="/dashboard" replace />;
       }
 
-      if (!isSignedIn && !isAuthPage && !isSelectPlanPage) {
+      if (!isSignedIn && !isAuthPage) {
         return <Navigate to="/login" replace />;
-      }
-
-      if (isSignedIn && !planId && !isSelectPlanPage && location.pathname !== '/dashboard') {
-        return <Navigate to="/select-plan" replace />;
       }
 
       return <>{children}</>;
