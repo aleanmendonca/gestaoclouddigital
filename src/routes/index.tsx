@@ -19,20 +19,24 @@ import React from 'react';
     import { Settings } from '../pages/dashboard/Settings';
     import { Login } from '../pages/auth/Login';
     import { Register } from '../pages/auth/Register';
+    import { SelectPlan } from '../pages/auth/SelectPlan';
     import { useClerk } from '@clerk/clerk-react';
     import { useUserStore } from '../store/user';
     import { Plans } from '../pages/dashboard/Plans';
 
     export function AppRoutes() {
       const { isSignedIn } = useClerk();
+      const planId = useUserStore((state) => state.planId);
 
       return (
         <Routes>
           <Route
             path="/"
             element={
-              isSignedIn ? (
+              isSignedIn && planId ? (
                 <Navigate to="/dashboard" replace />
+              ) : isSignedIn ? (
+                <Navigate to="/select-plan" replace />
               ) : (
                 <Navigate to="/login" replace />
               )
@@ -42,6 +46,7 @@ import React from 'react';
           {/* Auth Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+      
 
           {/* Protected Routes */}
           <Route path="/dashboard" element={<DashboardLayout />}>

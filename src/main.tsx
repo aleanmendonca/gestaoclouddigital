@@ -16,7 +16,10 @@ import { StrictMode } from 'react';
 
     root.render(
       <StrictMode>
-        <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
+        <ClerkProvider 
+          publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
+          signUpUrl="/register"
+        >
           <BrowserRouter>
             <Middleware>
               <Providers>
