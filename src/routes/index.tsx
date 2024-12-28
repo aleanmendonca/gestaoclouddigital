@@ -53,38 +53,38 @@ import React from 'react';
             <Route index element={<Dashboard />} />
             
             {/* Sales Routes */}
-            <Route path="sales">
+            <Route path="/sales">
               <Route index element={<Sales />} />
-              <Route path="products" element={<Products />} />
-              <Route path="quotes" element={<Quotes />} />
-              <Route path="services" element={<Services />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/quotes" element={<Quotes />} />
+              <Route path="/services" element={<Services />} />
             </Route>
 
             {/* Register Routes */}
-            <Route path="registers">
-              <Route path="clients" element={<Clients />} />
-              <Route path="suppliers" element={<Suppliers />} />
-              <Route path="services" element={<RegisterServices />} />
-              <Route path="professionals" element={<Professionals />} />
-              <Route path="accounts" element={<Accounts />} />
+            <Route path="/registers">
+              <Route path="/clients" element={<Clients />} />
+              <Route path="/suppliers" element={<Suppliers />} />
+              <Route path="/services" element={<RegisterServices />} />
+              <Route path="/professionals" element={<Professionals />} />
+              <Route path="/accounts" element={<Accounts />} />
             </Route>
 
             {/* Financial Routes */}
-            <Route path="financial">
+            <Route path="/financial">
               <Route index element={<Financial />} />
-              <Route path="income" element={<Income />} />
-              <Route path="expenses" element={<Expenses />} />
+              <Route path="/income" element={<Income />} />
+              <Route path="/expenses" element={<Expenses />} />
             </Route>
 
             {/* Control Routes */}
-            <Route path="controls">
-              <Route path="stock" element={<Stock />} />
-              <Route path="supplies" element={<Supplies />} />
+            <Route path="/controls">
+              <Route path="/stock" element={<Stock />} />
+              <Route path="/supplies" element={<Supplies />} />
             </Route>
 
             {/* Settings Route */}
-            <Route path="settings" element={<Settings />} />
-            <Route path="plans" element={<Plans />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/plans" element={<Plans />} />
           </Route>
 
           {/* Catch all */}
