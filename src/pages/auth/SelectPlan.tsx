@@ -1,59 +1,51 @@
 import React from 'react';
-    import { useNavigate } from 'react-router-dom';
-    import { usePlansStore, Plan } from '../../store/plans';
-    import { useUserStore } from '../../store/user';
-    import { Button } from '../../components/ui/Button';
-    import { AuthLayout } from '../../components/auth/AuthLayout';
-    import { useClerk } from '@clerk/clerk-react';
+import { Button } from '../components/ui/Button';
 
-    export function SelectPlan() {
-      const navigate = useNavigate();
-      const plans = usePlansStore((state) => state.plans);
-      const { setPlanId, currentUser, setCurrentUser } = useUserStore();
-      const { user, updateUser } = useClerk();
+const plans = [
+  {
+    id: 'basic',
+    name: 'Plano Básico',
+    price: 'R$ 29,90/mês',
+    description: 'Acesso a funcionalidades básicas.',
+  },
+  {
+    id: 'pro',
+    name: 'Plano Pro',
+    price: 'R$ 49,90/mês',
+    description: 'Acesso a funcionalidades avançadas.',
+  },
+  {
+    id: 'enterprise',
+    name: 'Plano Enterprise',
+    price: 'R$ 99,90/mês',
+    description: 'Acesso a todas as funcionalidades e suporte prioritário.',
+  },
+];
 
-      const handleSelectPlan = async (planId: string) => {
-        if (user) {
-          try {
-            await updateUser({
-              publicMetadata: {
-                planId: planId,
-              },
-            });
-            setPlanId(planId);
-            if (currentUser) {
-              setCurrentUser({...currentUser, planId: planId})
-            }
-            navigate('/dashboard');
-          } catch (error) {
-            console.error('Error updating user metadata:', error);
-          }
-        }
-      };
+export function SelectPlan() {
+  const handleSelectPlan = (planId: string) => {
+    console.log(`Plano selecionado: ${planId}`);
+    // Aqui você pode adicionar a lógica para prosseguir com a seleção do plano
+  };
 
-      return (
-        <AuthLayout title="Escolha seu Plano">
-          <div className="space-y-6">
-            {plans.map((plan) => (
-              <div key={plan.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h3 className="text-xl font-semibold mb-2">{plan.name}</h3>
-                <p className="text-gray-500 dark:text-gray-400 mb-4">
-                  {new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                  }).format(plan.price)} / {plan.billingCycle === 'monthly' ? 'mês' : 'ano'}
-                </p>
-                <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 mb-4">
-                  {plan.features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
-                  ))}
-                </ul>
-                <Button onClick={() => handleSelectPlan(plan.id)} className="w-full">
-                  Selecionar Plano
-                </Button>
-              </div>
-            ))}
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Selecione um Plano</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {plans.map((plan) => (
+          <div key={plan.id} className="border rounded-lg p-4 shadow-md">
+            <h2 className="text-xl font-semibold">{plan.name}</h2>
+            <p className="text-lg font-bold">{plan.price}</p>
+            <p className="text-gray-600">{plan.description}</p>
+            <Button 
+              onClick={() => handleSelectPlan(plan.id)} 
+              className="mt-4 w-full"
+            >
+              Selecionar
+            </Button>
           </div>
-        </AuthLayout>
-      );
-    }
+        ))}
+      </div>
+    </div>
+  );
+}
