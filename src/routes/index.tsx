@@ -46,11 +46,10 @@ import React from 'react';
           {/* Auth Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-      
+          <Route path="/dashboard" element={<DashboardLayout />}>
 
           {/* Protected Routes */}
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<Dashboard />} />
+          
             
             {/* Sales Routes */}
             <Route path="/sales">
