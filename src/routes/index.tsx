@@ -46,13 +46,11 @@ import React from 'react';
           {/* Auth Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<DashboardLayout />}>
-
-          {/* Protected Routes */}
+          <Route path="/dashboard" element={<DashboardLayout />}
           
             
             {/* Sales Routes */}
-            <Route path="/sales">
+            <Route path="/dashboard/sales">
               <Route index element={<Sales />} />
               <Route path="/products" element={<Products />} />
               <Route path="/quotes" element={<Quotes />} />
@@ -60,7 +58,7 @@ import React from 'react';
             </Route>
 
             {/* Register Routes */}
-            <Route path="/registers">
+            <Route path="/dashboard//registers">
               <Route path="/clients" element={<Clients />} />
               <Route path="/suppliers" element={<Suppliers />} />
               <Route path="/services" element={<RegisterServices />} />
